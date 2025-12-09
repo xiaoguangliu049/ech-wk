@@ -58,7 +58,7 @@ tg交流群 https://t.me/+ft-zI76oovgwNmRh
 
 - `-l`: 监听地址（默认：`127.0.0.1:30000`）
   ```bash
-  -l 127.0.0.1:1080
+  -l 127.0.0.1:30001
   ```
 
 - `-token`: 身份验证令牌
@@ -87,10 +87,10 @@ tg交流群 https://t.me/+ft-zI76oovgwNmRh
 
 ```bash
 # Windows
-ech-workers.exe -f your-worker.workers.dev:443 -l 127.0.0.1:1080
+ech-workers.exe -f your-worker.workers.dev:443 -l 127.0.0.1:30001
 
 # macOS / Linux
-./ech-workers -f your-worker.workers.dev:443 -l 127.0.0.1:1080
+./ech-workers -f your-worker.workers.dev:443 -l 127.0.0.1:30001
 ```
 
 #### 完整参数示例
@@ -98,7 +98,7 @@ ech-workers.exe -f your-worker.workers.dev:443 -l 127.0.0.1:1080
 ```bash
 ./ech-workers \
   -f your-worker.workers.dev:443 \
-  -l 0.0.0.0:1080 \
+  -l 0.0.0.0:30001 \
   -token your-token \
   -ip saas.sin.fan \
   -dns dns.alidns.com/dns-query \
@@ -110,11 +110,11 @@ ech-workers.exe -f your-worker.workers.dev:443 -l 127.0.0.1:1080
 **Linux/macOS:**
 ```bash
 # 使用 nohup
-nohup ./ech-workers -f your-worker.workers.dev:443 -l 127.0.0.1:1080 > ech-workers.log 2>&1 &
+nohup ./ech-workers -f your-worker.workers.dev:443 -l 127.0.0.1:30001 > ech-workers.log 2>&1 &
 
 # 使用 screen
 screen -S ech-workers
-./ech-workers -f your-worker.workers.dev:443 -l 127.0.0.1:1080
+./ech-workers -f your-worker.workers.dev:443 -l 127.0.0.1:30001
 # 按 Ctrl+A 然后 D 分离会话
 
 # 使用 systemd (创建服务文件)
@@ -131,7 +131,7 @@ After=network.target
 Type=simple
 User=your-username
 WorkingDirectory=/path/to/ech-workers
-ExecStart=/path/to/ech-workers -f your-worker.workers.dev:443 -l 127.0.0.1:1080
+ExecStart=/path/to/ech-workers -f your-worker.workers.dev:443 -l 127.0.0.1:30001
 Restart=always
 RestartSec=5
 
@@ -150,7 +150,7 @@ sudo systemctl status ech-workers
 **Windows:**
 ```powershell
 # 使用 Start-Process
-Start-Process -FilePath "ech-workers.exe" -ArgumentList "-f", "your-worker.workers.dev:443", "-l", "127.0.0.1:1080" -WindowStyle Hidden
+Start-Process -FilePath "ech-workers.exe" -ArgumentList "-f", "your-worker.workers.dev:443", "-l", "127.0.0.1:30001" -WindowStyle Hidden
 
 # 或使用任务计划程序创建计划任务
 ```
@@ -159,41 +159,41 @@ Start-Process -FilePath "ech-workers.exe" -ArgumentList "-f", "your-worker.worke
 
 启动代理后，配置你的应用程序使用 SOCKS5 代理：
 
-- **代理地址**: `127.0.0.1:1080`（或你指定的监听地址）
+- **代理地址**: `127.0.0.1:30001`（或你指定的监听地址）
 - **代理类型**: SOCKS5
-- **端口**: 1080（或你指定的端口）
+- **端口**: 30001（或你指定的端口）
 
 #### 浏览器配置示例
 
 **Chrome/Edge:**
 ```bash
 # Linux/macOS
-google-chrome --proxy-server="socks5://127.0.0.1:1080"
+google-chrome --proxy-server="socks5://127.0.0.1:30001"
 
 # Windows
-chrome.exe --proxy-server="socks5://127.0.0.1:1080"
+chrome.exe --proxy-server="socks5://127.0.0.1:30001"
 ```
 
 **Firefox:**
 - 设置 → 网络设置 → 手动代理配置
 - SOCKS 主机: `127.0.0.1`
-- 端口: `1080`
+- 端口: `30001`
 - SOCKS v5
 
 #### 环境变量配置
 
 **Linux/macOS:**
 ```bash
-export ALL_PROXY=socks5://127.0.0.1:1080
-export HTTP_PROXY=socks5://127.0.0.1:1080
-export HTTPS_PROXY=socks5://127.0.0.1:1080
+export ALL_PROXY=socks5://127.0.0.1:30001
+export HTTP_PROXY=socks5://127.0.0.1:30001
+export HTTPS_PROXY=socks5://127.0.0.1:30001
 ```
 
 **Windows (PowerShell):**
 ```powershell
-$env:ALL_PROXY="socks5://127.0.0.1:1080"
-$env:HTTP_PROXY="socks5://127.0.0.1:1080"
-$env:HTTPS_PROXY="socks5://127.0.0.1:1080"
+$env:ALL_PROXY="socks5://127.0.0.1:30001"
+$env:HTTP_PROXY="socks5://127.0.0.1:30001"
+$env:HTTPS_PROXY="socks5://127.0.0.1:30001"
 ```
 
 ### 查看帮助
@@ -214,7 +214,7 @@ $env:HTTPS_PROXY="socks5://127.0.0.1:1080"
 
 将输出重定向到文件：
 ```bash
-./ech-workers -f your-worker.workers.dev:443 -l 127.0.0.1:1080 > ech-workers.log 2>&1
+./ech-workers -f your-worker.workers.dev:443 -l 127.0.0.1:30001 > ech-workers.log 2>&1
 ```
 
 ## 软路由部署
@@ -253,7 +253,7 @@ start_service() {
     procd_open_instance
     procd_set_param command /usr/bin/ech-workers \
         -f your-worker.workers.dev:443 \
-        -l 0.0.0.0:1080 \
+        -l 0.0.0.0:30001 \
         -token your-token \
         -ip saas.sin.fan \
         -dns dns.alidns.com/dns-query \
@@ -291,7 +291,7 @@ logread | grep ech-workers
 在插件中配置：
 - 代理类型: SOCKS5
 - 服务器: `127.0.0.1`
-- 端口: `1080`
+- 端口: `30001`
 
 **方法 2: 使用 Shadowsocks-libev 的 ss-local**
 
@@ -305,7 +305,7 @@ opkg update
 opkg install redsocks
 
 # 配置 redsocks.conf
-# 将流量转发到 127.0.0.1:1080
+# 将流量转发到 127.0.0.1:30001
 ```
 
 ### iKuai 软路由部署
@@ -320,7 +320,7 @@ opkg install redsocks
 
 ```bash
 #!/bin/sh
-/bin/ech-workers -f your-worker.workers.dev:443 -l 127.0.1:1080 -token your-token &
+/bin/ech-workers -f your-worker.workers.dev:443 -l 127.0.1:30001 -token your-token &
 ```
 
 设置权限：
@@ -338,7 +338,7 @@ chmod +x /etc/init.d/ech-workers.sh
 #### 4. 配置 iKuai 代理
 
 在 iKuai 的"流控分流" → "端口分流"中配置：
-- 将指定流量转发到 `127.0.0.1:1080` (SOCKS5)
+- 将指定流量转发到 `127.0.0.1:30001` (SOCKS5)
 
 ### 其他软路由系统
 
@@ -362,10 +362,10 @@ chmod +x /etc/init.d/ech-workers.sh
 
 ```bash
 # 监听地址建议使用 0.0.0.0 以允许局域网访问
-./ech-workers -f your-worker.workers.dev:443 -l 0.0.0.0:1080
+./ech-workers -f your-worker.workers.dev:443 -l 0.0.0.0:30001
 
 # 或仅监听内网接口
-./ech-workers -f your-worker.workers.dev:443 -l 192.168.1.1:1080
+./ech-workers -f your-worker.workers.dev:443 -l 192.168.1.1:30001
 ```
 
 #### 防火墙规则
@@ -377,7 +377,7 @@ chmod +x /etc/init.d/ech-workers.sh
 uci add firewall rule
 uci set firewall.@rule[-1].name='Allow-ECH-Workers'
 uci set firewall.@rule[-1].src='lan'
-uci set firewall.@rule[-1].dest_port='1080'
+uci set firewall.@rule[-1].dest_port='30001'
 uci set firewall.@rule[-1].proto='tcp'
 uci set firewall.@rule[-1].target='ACCEPT'
 uci commit firewall
@@ -400,7 +400,7 @@ ps | grep ech-workers
 logread | grep ech-workers
 
 # 测试连接
-curl --socks5 127.0.0.1:1080 http://www.google.com
+curl --socks5 127.0.0.1:30001 http://www.google.com
 ```
 
 ### 常见问题
@@ -476,7 +476,7 @@ python3 gui.py
 
 1. **配置服务器**
    - 点击"新增"添加服务器配置（会创建新配置，不会覆盖现有配置）
-   - 填写服务地址（如：`your-worker.workers.dev:443`）和监听地址（如：`127.0.0.1:1080`）
+   - 填写服务地址（如：`your-worker.workers.dev:443`）和监听地址（如：`127.0.0.1:30001`）
    - 可选：填写身份令牌、优选IP、DOH服务器、ECH域名等高级选项
    - 点击"保存"保存当前配置
 
